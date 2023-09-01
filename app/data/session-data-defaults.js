@@ -1,5 +1,8 @@
+const sampleBarrierData = require('./barrier-information/dbt-barrier-sample-data');
+
 module.exports = {
 
-  // Insert values here
+  sampleBarrierData //populates barrier information and public tabs
 
 }
+

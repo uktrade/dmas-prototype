@@ -1,0 +1,39 @@
+{% if data['barrier-public-view-status'] and (not data['public-title'] or not data['public-summary']) %}
+<div class="public-view-status">
+    <h2 class="govuk-heading-m public-view-status__heading govuk-!-margin-bottom-0 govuk-!-margin-top-2">PUBLIC VIEW STATUS</h2>
+        <p class="govuk-!-font-weight-bold govuk-!-margin-0 govuk-!-padding-top-2">
+            This barrier is not live.
+        </p>
+        <p class="govuk-!-margin-0 govuk-!-padding-top-2">
+            The public title and summary have not been added.
+        </p>
+</div>
+
+
+
+
+{% elseif data['barrier-public-view-status'] and (data['public-title'] and data['public-summary']) %}
+<div class="public-view-status">
+    <h2 class="govuk-heading-m public-view-status__heading govuk-!-margin-bottom-0 govuk-!-margin-top-2">PUBLIC VIEW STATUS</h2>
+        <p class="govuk-!-font-weight-bold govuk-!-margin-0 govuk-!-padding-top-2">
+            This barrier is not live.
+        </p>
+        <p class="govuk-!-margin-0 govuk-!-padding-top-2">
+            The approvers list has not been confirmed.
+        </p>
+</div>
+
+
+
+
+{% else %}
+<div class="public-view-status">
+    <h2 class="govuk-heading-m public-view-status__heading govuk-!-margin-bottom-0 govuk-!-margin-top-2">PUBLIC VIEW STATUS</h2>
+        <p class="govuk-!-font-weight-bold govuk-!-margin-0 govuk-!-padding-top-2">
+            This barrier is not live.
+        </p>
+        <p class="govuk-!-margin-0 govuk-!-padding-top-2">
+            The public view status has not been set.
+        </p>
+</div>
+{% endif %}
