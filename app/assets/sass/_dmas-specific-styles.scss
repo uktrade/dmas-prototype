@@ -46,15 +46,48 @@ $colour-dbt-websafe-gh2: #005ea5;
 	}
 }
 
+/* Come back and use a mixin? */
 .public-view-status {
 	padding: 10px 10px 10px 10px;
 	flex: 1;
 	margin-bottom: 20px;
-	border: 2px solid $colour-dbt-pending-blue;
 
-	&__heading {
-		color: $colour-dbt-pending-blue;
+	&__notlive {
+		border: 2px solid $colour-dbt-pending-blue;
+		
+		&__heading{
+			color: $colour-dbt-pending-blue;
+		}
 	}
+
+	&__published {
+		border: 2px solid $colour-dbt-published-orange;
+
+		&__heading{
+			color:$colour-dbt-published-orange;
+		}
+	}
+
+	&__notallowed {
+		border: 2px solid $colour-dbt-notallowed-pink;
+
+		&__heading{
+			color: $colour-dbt-notallowed-pink;
+		}
+	}
+
+	&__deadlineexpired {
+		border: 2px solid $colour-dbt-warning-red;
+		
+		&__heading{
+			color: $colour-dbt-warning-red;;
+		}
+	}
+
+}
+
+.approvers-table {
+	padding-right: 20px;
 }
 
 /* From existing _global.scss file for formatting cancel link nicely on forms */

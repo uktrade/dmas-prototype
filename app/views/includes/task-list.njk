@@ -1,3 +1,13 @@
+<!-- SET SOME DEFAULT VALUES -->
+{% set defaultapproversList = data.defaultApprovers %}
+<!-- read approver checkboxes into array -->
+<!-- Come back and delete this if not needed -->
+{% set checkedApprovers = data['confirm-approvers'] %}
+{% set approvedList = [] %}
+{% for confapprover in checkedApprovers if confapprover == defapprover %}
+            {% set approvedList = (approvedList.push(confapprover, 'yes'), approvedList) %}
+{% endfor %}
+
 <!-- VIEW STATE, TITLE AND SUMMARY -->
 <div class="information-box">
     <h2 class="govuk-heading-m govuk-!-margin-bottom-0 govuk-!-margin-top-2">Prepare barrier for publication</h2>
@@ -43,15 +53,15 @@
                 <strong class="govuk-tag govuk-tag--blue">
                     pending
                 </strong>
-                {% elseif data['public-title'] and data['public-summary'] %}
+            {% elseif data['public-title'] and data['public-summary'] %}
                 <strong class="govuk-tag govuk-tag--green">
                     completed
                 </strong>
-                {% else %}
+            {% else %}
                 <strong class="govuk-tag govuk-tag--grey">
                     incomplete
                 </strong>
-                {% endif %}
+            {% endif %}
         </dd>
         </div>
         {% if data['public-title'] %}
@@ -66,19 +76,58 @@
         {% endif %}
     </dl>
     <!-- APPROVERS LIST -->
-    <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-bottom-2 govuk-!-padding-0">
+
+     <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-bottom-2 govuk-!-padding-0">
         <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
             <h3 class="govuk-heading-s govuk-!-margin-0">Confirm list of approvers</h3>
         </dt>
         <dd class="govuk-summary-list__actions">
+        {% if not data['approvers-confirm-status'] %}
             <strong class="govuk-tag govuk-tag--blue">
                 pending
             </strong>
+        {% else %}
+            <strong class="govuk-tag govuk-tag--green">
+                completed
+            </strong>
+        {% endif %}
         </dd>
         </div>
-            <p class="govuk-body govuk-!-margin-0"><a href="#" class="govuk-link">Confirm approvers for this barrier</a></p>    
+        <!--
+        <p>Default approvers: {{defaultapproversList}}</p>
+        <p>Approved approvers: {{checkedApprovers}}</p>
+        -->         
+        <ul class="govuk-list govuk-list--spaced">
+        <!-- CHECK THAT APPROVERS AGREED AND AT LEAST ONE CONFIRMED APPROVAL-->
+        {% if data['approvers-confirm-status'] and data['confirm-approvers'] %}
+            {% for item in defaultapproversList %}
+                {% if item in checkedApprovers %}    
+                    <li class="govuk-body-s">{{ item }} - <strong>approved</strong> 
+                    </li>
+                    {% else %}
+                    <li class="govuk-body-s">{{ item }} - <strong>outstanding</strong>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        <a href="approvers" class="govuk-link">Edit approvers</a>&nbsp;&nbsp;<a href="approvers-progress" class="govuk-link">Track approvers</a>
+        {% elseif data['approvers-confirm-status'] and not data['confirm-approvers'] %}
+            <!-- CHECK THAT APPROVERS AGREED AND AT LEAST ONE CONFIRMED APPROVAL-->
+            {% for item in defaultapproversList %}
+                <li class="govuk-body-s">{{ item }} - outstanding
+                </li>
+            {% endfor %}
+            <a href="approvers" class="govuk-link">Edit approvers</a>&nbsp;&nbsp;<a href="approvers-progress" class="govuk-link">Track approvers</a>
+        
+        {% else%}
+            {% for items in defaultapproversList %}
+                <li class="govuk-body-s">{{ items }}</li>
+            {% endfor %}
+                <a href="approvers" class="govuk-link">Edit approvers</a>
+        {% endif %} 
+        </ul>
     </dl>
+   
     {{ govukDetails({
         summaryText: "Who are approvers?",
         text: "Some text explaining about approvers goes here."
