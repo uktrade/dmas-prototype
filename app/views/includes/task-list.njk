@@ -112,14 +112,15 @@
             {% endfor %}
         <a href="approvers" class="govuk-link">Edit approvers</a>&nbsp;&nbsp;<a href="approvers-progress" class="govuk-link">Track approvers</a>
         {% elseif data['approvers-confirm-status'] and not data['confirm-approvers'] %}
-            <!-- CHECK THAT APPROVERS AGREED AND AT LEAST ONE CONFIRMED APPROVAL-->
+            <!-- CHECK THAT APPROVERS AGREED AND NO CONFIRMED APPROVAL-->
             {% for item in defaultapproversList %}
-                <li class="govuk-body-s">{{ item }} - outstanding
+                <li class="govuk-body-s">{{ item }} - <strong>outstanding</strong>
                 </li>
             {% endfor %}
             <a href="approvers" class="govuk-link">Edit approvers</a>&nbsp;&nbsp;<a href="approvers-progress" class="govuk-link">Track approvers</a>
         
         {% else%}
+            <!-- NO APPROVERS AGREED AND NO CONFIRMED APPROVAL-->
             {% for items in defaultapproversList %}
                 <li class="govuk-body-s">{{ items }}</li>
             {% endfor %}
