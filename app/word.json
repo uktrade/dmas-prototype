@@ -1,17 +1,5 @@
-//
-// For guidance on how to create routes see:
-// https://prototype-kit.service.gov.uk/docs/create-routes
-//
-
-const govukPrototypeKit = require('govuk-prototype-kit')
-const router = govukPrototypeKit.requests.setupRouter()
-
-const tags = ["Wales Priority", "Brexit", "NI Protocol", "Asia Pacific Pilot", "Programme Fund", "International Standards", "Clean Growth"]
-const status = ["Open", "Resolved: In Part", "Resolved: In Full", "Dormant"]
-const countries = ["Antigua and Barbuda", "Belgium", "China", "Guatemala", "Sudan", "United Kingdom", "United States of America", "Zimbabwe"]
-const sectors = ["Aerospace", "Agriculture", "Automotive", "Chemicals", "Construction", "Consumer Goods", "Creative Industries", "Defence", "Education", "Energy", "Engineering", "Financial Services", "Food and Drink", "Healthcare", "Life Sciences", "Mining", "Oil and Gas", "Professional Services", "Rail", "Renewable Energy", "Retail", "Space", "Technology", "Textiles", "Transport", "Water"]
-
-const words = [
+{
+  "words": [
     "people",
     "history",
     "way",
@@ -548,82 +536,4 @@ const words = [
     "risk",
     "word"
   ]
-
-
-function makeid(length) {
-    let result = '';
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const charactersLength = characters.length;
-    let counter = 0;
-    while (counter < length) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-      counter += 1;
-    }
-    return result;
 }
-
-function format_date(date){
-    let year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(date);
-    let month = new Intl.DateTimeFormat('en', { month: 'long' }).format(date);
-    let day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(date);
-
-    return `${day} ${month} ${year}`
-}
-
-function generate_list_of_barriers(amount) {
-    let no_of_barriers = amount;
-    var barriers = []
-    for (let i = 0; i < no_of_barriers; i++) {
-
-        let this_tags = []
-        let no_of_tags = Math.floor(Math.random() * 3) + 1
-        for (let j = 0; j < no_of_tags; j++){
-            this_tags.push(tags[Math.floor(Math.random() * tags.length)])
-        }
-
-        barriers.push({
-            name: words[Math.floor(Math.random() * words.length)] + ' ' + words[Math.floor(Math.random() * words.length)],
-            id: makeid(4),
-            date_reported: format_date(new Date(new Date() - Math.random() * (1e+12))),
-            last_updated: format_date(new Date(new Date() - Math.random() * (1e+12))),
-            location: countries[Math.floor(Math.random() * countries.length)],
-            status: status[Math.floor(Math.random() * status.length)],
-            tags: this_tags,
-            sector : sectors[Math.floor(Math.random() * sectors.length)],
-        })
-    }
-    return barriers
-}
-
-// Add your routes here
-router.post('/hs-codes-known-answer', function(request, response) {
-
-    var knowHsCodes = request.session.data['do-you-know-the-hs-codes']
-    if (knowHsCodes == "yes"){
-        response.redirect("report-a-barrier/mve-updates/section-7v2-hscodes")
-    } else {
-        response.redirect("report-a-barrier/mve-updates/section-7v2-no-code-route")
-    }
-})
-
-router.get('/barrier-search/search', function(request, response) {
-    let normal_amount = 50
-
-    for (query_param in request.query){
-        if (request.query[query_param]){
-            if (Array.isArray(request.query[query_param])){
-                normal_amount = normal_amount - request.query[query_param].length
-            }
-
-            // There is another filter, reduce the number of results
-            normal_amount = normal_amount - 3
-        }
-    }
-
-    let random_barriers = generate_list_of_barriers(normal_amount)
-    let barrier_count = random_barriers.length
-    return response.render('barrier-search/search.html', {
-        barriers: random_barriers,
-        barrier_count: barrier_count
-    })
-})
