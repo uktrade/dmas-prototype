@@ -11,6 +11,9 @@
     "govuk-frontend": "^4.7.0",
     "govuk-prototype-kit": "13.13.1",
     "jquery": "3.7.1",
+    "random-words": "^2.0.0",
+    "react": "^18.2.0",
     "save": "^2.9.0"
   }
+
 }
