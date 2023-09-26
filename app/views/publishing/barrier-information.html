@@ -6,17 +6,19 @@
   Barrier information – {{ serviceName }} – GOV.UK Prototype Kit
 {% endblock %}
 
-{% block content %}
+{% block header %}
 <!-- MASTHEAD SECTION -->
-<div class="govuk-grid-row">
-    <div class="govuk-grid-column-full-width">
-      {% for item in barrierInformation %}
-        {{ item.barrierID }}
-      {% endfor %}
-      Barrier code: {{ barrierInformation[1].barrierID }}
-      {% include "../includes/masthead.njk" %}
+    {% include "../includes/dmasheader.njk" %}
+    <div class="datahub-header__navigation-container">
+      {% include "../includes/datahubnavbar.njk" %}
+      {% include "../includes/dmasnavbar.njk" %}
     </div>
-</div>
+    {% include "../includes/masthead.njk" %}
+
+{% endblock %}
+
+{% block content %}
+
 <!-- TAGS SECTION -->
 <!-- TABS SECTION -->
 <div class="govuk-tabs govuk-!-padding-top-8" data-module="govuk-tabs">
