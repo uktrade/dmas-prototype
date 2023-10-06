@@ -46,6 +46,44 @@ $colour-dbt-websafe-gh2: #005ea5;
 	}
 }
 
+/* THIS IS JUST FOR FIREBREAK CONCEPTS */
+/* FIREBREAK CONCEPTS START */
+
+.information-box-concept {
+
+	padding: 16px;
+	margin-bottom: 20px;
+	flex: 1;
+	border: 3px solid $colour-dbt-info-box-grey;
+	text-align: center;
+
+	&__fix {
+		display: flex;
+		width: 100;
+
+	}
+
+}
+
+.top-message-banner {
+	display: flex;
+	width: 100%;
+	padding: 1.25rem;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.625rem;
+
+	border: 5px solid var(--Brand, #1D70B8);
+	background: #FFF;
+
+}
+
+
+
+/* FIREBREAK CONCEPTS END */
+
+
+
 /* Come back and use a mixin? */
 .public-view-status {
 	padding: 10px 10px 10px 10px;
