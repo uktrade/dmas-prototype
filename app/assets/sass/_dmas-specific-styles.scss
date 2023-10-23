@@ -15,6 +15,15 @@ $colour-dbt-info-box-lgrey: #f3f2f1;
 $colour-dbt-gh1: #cf102d;
 $colour-dbt-websafe-gh2: #005ea5;
 
+/* Additional GOV colours (not covered in live-styles colours.scss */
+$govuk-green: govuk-colour( 'green' );
+$govuk-black: govuk-colour( 'black' );
+
+/* CTA vars */
+$cta-button-width: 295px;
+$cta-button-margin: 30px;
+
+
 /* Set DMAS font stack */
 
 /* body, p, h1, h2, h3, h4, h5, h6, a, span, div, table, th, td, blockquote, li, tr {
@@ -45,6 +54,49 @@ $colour-dbt-websafe-gh2: #005ea5;
 		}
 	}
 }
+
+/* INTERVENTION COMPONENT */
+
+.intervention-banner {
+    color: $govuk-black;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: $colour-dbt-info-box-lgrey;
+    border-left: 10px solid $govuk-green;
+}
+
+@media (min-width: 40.0625em) {
+    .intervention-banner {
+        margin-bottom:30px
+    }
+}
+
+.intervention-banner__dismiss-icon {
+	width: 1.1em;
+	height: 1em;
+	margin-bottom: -2px;
+}
+
+/* HELP CTA COMPONENT */
+/* _dash-card.scss and _dash-button.scss classes would replace this code */
+
+.help-cta-card {
+
+	width: $cta-button-width;
+	margin: $cta-button-margin;
+	padding: 8px 10px 7px;
+	border: 3px solid $govuk-green;
+	text-align: left;
+	flex: 1;
+
+	&__fix {
+		display: flex;
+		width: 100;
+
+	}
+
+}
+
 
 /* THIS IS JUST FOR FIREBREAK CONCEPTS */
 /* FIREBREAK CONCEPTS START */
@@ -134,3 +186,4 @@ $colour-dbt-websafe-gh2: #005ea5;
 	margin-left: govuk-em( 10, 16 );
 	font-size: 19px;
 }
+

@@ -5,13 +5,9 @@
 
 // Add extra styles here
 
-//$govuk-page-width: 1200px;
-
 //
 //Import some DBT/DMAS specific stylesheets
 //
-
-
 
 //Import some from LIVE (market-access-python-frontend-master)
 @import 'live-styles/all.scss';
@@ -25,3 +21,6 @@
 
 // Override the default GOV.UK Frontend font stack
 /* $govuk-font-family: "Arial", "Helvetica Neue", "Helvetica", sans-serif; */
+
+//$govuk-page-width: 1800px;
+
